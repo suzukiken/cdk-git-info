@@ -3,7 +3,8 @@ import { Construct } from 'constructs';
 
 interface MyStackProps extends StackProps {
   branch: string,
-  commit: string
+  commit: string,
+  remoteUrl: string
 }
 
 export class CdkGitInfoStack extends Stack {
@@ -19,6 +20,10 @@ export class CdkGitInfoStack extends Stack {
     
     new CfnOutput(this, 'GitCommit', { 
       value: props.commit
+    })
+    
+    new CfnOutput(this, 'GitRemoteUrl', { 
+      value: props.remoteUrl
     })
     
     new CfnOutput(this, 'CdkStage', { 

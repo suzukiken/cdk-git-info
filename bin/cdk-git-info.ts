@@ -14,6 +14,9 @@ async function main() {
   let resCommit = await exec('git rev-parse HEAD')
   const gitCommit = resCommit.stdout.trim()
   
+  let resRemoteUrl = await exec('git config --get remote.origin.url')
+  const gitRemoteUrl = resRemoteUrl.stdout.trim()
+  
   const app = new cdk.App()
   
   new CdkGitInfoStack(app, 'CdkGitInfoStack', {
@@ -22,7 +25,8 @@ async function main() {
       region: process.env.CDK_DEFAULT_REGION 
     },
     branch: gitBranch,
-    commit: gitCommit
+    commit: gitCommit,
+    remoteUrl: gitRemoteUrl
   })
 }
 
