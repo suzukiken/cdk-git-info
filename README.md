@@ -5,5 +5,6 @@ CloudFormationが以下の内容をアウトプットします。
 
 - GitBranch: デプロイ時のGitブランチ名
 - GitCommit: デプロイ時のGitコミットのハッシュナンバー
+- GitRemoteUrl: デプロイ時のGitリモートリポジトリのURL
 - CdkStage: CDKデプロイ時にコンテクストとして与えたstageの値
 - CdkStageParams: CDKデプロイ時にコンテクストとして与えたstageのJSONを文字列化したもの
