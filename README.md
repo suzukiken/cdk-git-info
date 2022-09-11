@@ -1,14 +1,9 @@
-# Welcome to your CDK TypeScript project
+コマンド例：
+`cdk deploy -c stage=dev`
 
-This is a blank project for CDK development with TypeScript.
+CloudFormationが以下の内容をアウトプットします。
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-## Useful commands
-
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+- GitBranch: デプロイ時のGitブランチ名
+- GitCommit: デプロイ時のGitコミットのハッシュナンバー
+- CdkStage: CDKデプロイ時にコンテクストとして与えたstageの値
+- CdkStageParams: CDKデプロイ時にコンテクストとして与えたstageのJSONを文字列化したもの

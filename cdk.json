@@ -34,6 +34,10 @@
     "@aws-cdk/core:target-partitions": [
       "aws",
       "aws-cn"
-    ]
+    ],
+    "dev": {
+      "param1": "value1",
+      "param2": "value2"
+    }
   }
 }
