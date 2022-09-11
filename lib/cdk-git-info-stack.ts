@@ -1,16 +1,30 @@
-import { Stack, StackProps } from 'aws-cdk-lib';
+import { Stack, StackProps, CfnOutput } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+
+interface MyStackProps extends StackProps {
+  branch: string,
+  commit: string
+}
 
 export class CdkGitInfoStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
+  constructor(scope: Construct, id: string, props: MyStackProps) {
     super(scope, id, props);
+    
+    const stage = this.node.tryGetContext('stage')
 
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'CdkGitInfoQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    new CfnOutput(this, 'GitBranch', { 
+      exportName: id + 'GitBranch', 
+      value: props.branch
+    })
+    
+    new CfnOutput(this, 'GitCommit', { 
+      exportName: id + 'GitCommit', 
+      value: props.commit
+    })
+    
+    new CfnOutput(this, 'CdkStage', { 
+      exportName: id + 'CdkStage', 
+      value: stage
+    })
   }
 }
