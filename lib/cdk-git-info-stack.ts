@@ -1,18 +1,17 @@
 import { Stack, StackProps, CfnOutput } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
-interface MyStackProps extends StackProps {
+interface DeployInfoStackProps extends StackProps {
+  stage: string,
+  params: object,
   branch: string,
   commit: string,
   remoteUrl: string
 }
 
 export class CdkGitInfoStack extends Stack {
-  constructor(scope: Construct, id: string, props: MyStackProps) {
+  constructor(scope: Construct, id: string, props: DeployInfoStackProps) {
     super(scope, id, props);
-    
-    const stage = this.node.tryGetContext('stage')
-    const stageParams = this.node.tryGetContext(stage)
 
     new CfnOutput(this, 'GitBranch', { 
       value: props.branch
@@ -27,11 +26,11 @@ export class CdkGitInfoStack extends Stack {
     })
     
     new CfnOutput(this, 'CdkStage', { 
-      value: stage
+      value: props.stage
     })
     
-    new CfnOutput(this, 'CdkStageParams', { 
-      value: JSON.stringify(stageParams)
+    new CfnOutput(this, 'CdkParams', { 
+      value: JSON.stringify(props.params)
     })
   }
 }

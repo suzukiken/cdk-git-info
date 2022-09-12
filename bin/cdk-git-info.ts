@@ -18,6 +18,17 @@ async function main() {
   const gitRemoteUrl = resRemoteUrl.stdout.trim()
   
   const app = new cdk.App()
+  let params = {}
+  
+  let stage = app.node.tryGetContext('stage')
+  if (stage === undefined) {
+    stage = ''
+  } else {
+    params = app.node.tryGetContext(stage)
+  }
+  if (params === undefined) {
+    params = {}
+  }
   
   new CdkGitInfoStack(app, 'CdkGitInfoStack', {
     env: { 
@@ -26,7 +37,9 @@ async function main() {
     },
     branch: gitBranch,
     commit: gitCommit,
-    remoteUrl: gitRemoteUrl
+    remoteUrl: gitRemoteUrl,
+    stage: stage,
+    params: params
   })
 }
 
