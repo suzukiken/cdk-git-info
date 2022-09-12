@@ -8,13 +8,13 @@ import * as childProcess from 'child_process'
 const exec = util.promisify(childProcess.exec)
 
 async function main() {
-  let resBranch = await exec('git rev-parse --abbrev-ref HEAD')
+  const resBranch = await exec('git rev-parse --abbrev-ref HEAD')
   const gitBranch = resBranch.stdout.trim()
-
-  let resCommit = await exec('git rev-parse HEAD')
+  
+  const resCommit = await exec('git rev-parse HEAD')
   const gitCommit = resCommit.stdout.trim()
   
-  let resRemoteUrl = await exec('git config --get remote.origin.url')
+  const resRemoteUrl = await exec('git config --get remote.origin.url')
   const gitRemoteUrl = resRemoteUrl.stdout.trim()
   
   const app = new cdk.App()
